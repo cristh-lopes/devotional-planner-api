@@ -1,0 +1,38 @@
+# ============================================
+# Node.js + TypeScript + whatsapp-web.js
+# ============================================
+
+# Dependências
+node_modules/
+
+# Compilação
+dist/
+build/
+
+# Logs e debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Ambiente
+.env
+.env.local
+.env.*.local
+
+# Sessões do WhatsApp (armazenadas pelo LocalAuth)
+.session/
+.sessions/
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
