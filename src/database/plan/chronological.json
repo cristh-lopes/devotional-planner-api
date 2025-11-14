@@ -1,0 +1,892 @@
+{
+  "Plan": {
+    "Description": "Plano cronológico de leitura da Bíblia em 1 ano (nome e descrição em português). As abreviações dos livros seguem o padrão em português (por exemplo GN para Gênesis). Os elementos/labels técnicos permanecem em inglês.",
+    "Meta": "Fonte: Blue Letter Bible - Chronological 1-Year Plan. Dias 1-90 expandidos com o número exato do versículo final. Dias 91-365 mantêm capítulo final como 'end' para revisão posterior.",
+    "Days": [
+      {
+        "_n": "1",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "3", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "2",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "4", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "7", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "3",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "8", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "11", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "4",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "12", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "15", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "5",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "16", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "18", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "6",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "19", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "21", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "7",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "22", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "24", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "8",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "25", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "26", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "9",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "27", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "29", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "10",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "30", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "31", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "11",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "32", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "34", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "12",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "35", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "37", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "13",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "38", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "40", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "14",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "41", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "42", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "15",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "43", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "45", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "16",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "46", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "47", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "17",
+        "Reading": {
+          "start": { "_book": "GN", "_chapter": "48", "_verse": "1" },
+          "end": { "_book": "GN", "_chapter": "50", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "18",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "3", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "19",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "4", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "6", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "20",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "7", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "9", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "21",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "10", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "12", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "22",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "13", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "15", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "23",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "16", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "18", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "24",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "19", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "21", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "25",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "22", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "24", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "26",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "25", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "27", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "27",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "28", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "29", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "28",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "30", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "32", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "29",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "33", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "35", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "30",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "36", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "38", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "31",
+        "Reading": {
+          "start": { "_book": "EX", "_chapter": "39", "_verse": "1" },
+          "end": { "_book": "EX", "_chapter": "40", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "32",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "4", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "33",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "5", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "7", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "34",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "8", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "10", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "35",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "11", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "13", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "36",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "14", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "15", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "37",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "16", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "18", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "38",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "19", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "21", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "39",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "22", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "23", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "40",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "24", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "25", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "41",
+        "Reading": {
+          "start": { "_book": "LV", "_chapter": "26", "_verse": "1" },
+          "end": { "_book": "LV", "_chapter": "27", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "42",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "2", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "43",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "3", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "4", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "44",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "5", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "6", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "45",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "7", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "7", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "46",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "8", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "10", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "47",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "11", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "13", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "48",
+        "Reading": [
+          {
+            "start": { "_book": "NM", "_chapter": "14", "_verse": "1" },
+            "end": { "_book": "NM", "_chapter": "15", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "90", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "90", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "49",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "16", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "17", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "50",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "18", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "20", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "51",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "21", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "22", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "52",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "23", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "25", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "53",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "26", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "27", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "54",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "28", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "30", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "55",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "31", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "32", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "56",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "33", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "34", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "57",
+        "Reading": {
+          "start": { "_book": "NM", "_chapter": "35", "_verse": "1" },
+          "end": { "_book": "NM", "_chapter": "36", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "58",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "2", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "59",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "3", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "4", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "60",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "5", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "7", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "61",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "8", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "10", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "62",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "11", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "13", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "63",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "14", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "16", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "64",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "17", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "20", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "65",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "21", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "23", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "66",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "24", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "27", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "67",
+        "Reading": {
+          "start": { "_book": "DT", "_chapter": "28", "_verse": "1" },
+          "end": { "_book": "DT", "_chapter": "30", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "68",
+        "Reading": [
+          {
+            "start": { "_book": "DT", "_chapter": "32", "_verse": "1" },
+            "end": { "_book": "DT", "_chapter": "34", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "91", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "91", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "69",
+        "Reading": {
+          "start": { "_book": "JS", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "JS", "_chapter": "4", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "70",
+        "Reading": {
+          "start": { "_book": "JS", "_chapter": "5", "_verse": "1" },
+          "end": { "_book": "JS", "_chapter": "8", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "71",
+        "Reading": {
+          "start": { "_book": "JS", "_chapter": "9", "_verse": "1" },
+          "end": { "_book": "JS", "_chapter": "11", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "72",
+        "Reading": {
+          "start": { "_book": "JS", "_chapter": "12", "_verse": "1" },
+          "end": { "_book": "JS", "_chapter": "15", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "73",
+        "Reading": {
+          "start": { "_book": "JS", "_chapter": "16", "_verse": "1" },
+          "end": { "_book": "JS", "_chapter": "18", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "74",
+        "Reading": {
+          "start": { "_book": "JS", "_chapter": "19", "_verse": "1" },
+          "end": { "_book": "JS", "_chapter": "21", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "75",
+        "Reading": {
+          "start": { "_book": "JS", "_chapter": "22", "_verse": "1" },
+          "end": { "_book": "JS", "_chapter": "24", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "76",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "2", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "77",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "3", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "5", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "78",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "6", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "7", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "79",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "8", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "9", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "80",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "10", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "12", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "81",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "13", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "15", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "82",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "16", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "18", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "83",
+        "Reading": {
+          "start": { "_book": "JZ", "_chapter": "19", "_verse": "1" },
+          "end": { "_book": "JZ", "_chapter": "21", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "84",
+        "Reading": {
+          "start": { "_book": "RT", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "RT", "_chapter": "4", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "85",
+        "Reading": {
+          "start": { "_book": "1SM", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "1SM", "_chapter": "3", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "86",
+        "Reading": {
+          "start": { "_book": "1SM", "_chapter": "4", "_verse": "1" },
+          "end": { "_book": "1SM", "_chapter": "8", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "87",
+        "Reading": {
+          "start": { "_book": "1SM", "_chapter": "9", "_verse": "1" },
+          "end": { "_book": "1SM", "_chapter": "12", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "88",
+        "Reading": {
+          "start": { "_book": "1SM", "_chapter": "13", "_verse": "1" },
+          "end": { "_book": "1SM", "_chapter": "14", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "89",
+        "Reading": {
+          "start": { "_book": "1SM", "_chapter": "15", "_verse": "1" },
+          "end": { "_book": "1SM", "_chapter": "17", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "90",
+        "Reading": [
+          {
+            "start": { "_book": "1SM", "_chapter": "18", "_verse": "1" },
+            "end": { "_book": "1SM", "_chapter": "20", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "11", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "11", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "59", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "59", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "91",
+        "Reading": {
+          "start": { "_book": "1SM", "_chapter": "21", "_verse": "1" },
+          "end": { "_book": "1SM", "_chapter": "24", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "92",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "7", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "7", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "27", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "27", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "31", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "31", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "34", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "34", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "52", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "52", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "93",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "56", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "56", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "120", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "120", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "140", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "142", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "94",
+        "Reading": {
+          "start": { "_book": "1SM", "_chapter": "25", "_verse": "1" },
+          "end": { "_book": "1SM", "_chapter": "27", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "95",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "17", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "17", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "35", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "35", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "54", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "54", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "63", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "63", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "96",
+        "Reading": [
+          {
+            "start": { "_book": "1SM", "_chapter": "28", "_verse": "1" },
+            "end": { "_book": "1SM", "_chapter": "31", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "18", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "18", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "97",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "121", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "121", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "123", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "125", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "128", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "130", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "98",
+        "Reading": {
+          "start": { "_book": "2SM", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "2SM", "_chapter": "4", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "99",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "6", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "6", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "8", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "10", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "14", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "14", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "16", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "16", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "19", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "19", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "21", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "21", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "100",
+        "Reading": {
+          "start": { "_book": "1CR", "_chapter": "1", "_verse": "1" },
+          "end": { "_book": "1CR", "_chapter": "2", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "101",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "43", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "45", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "49", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "49", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "84", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "85", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "87", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "87", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "102",
+        "Reading": {
+          "start": { "_book": "1CR", "_chapter": "3", "_verse": "1" },
+          "end": { "_book": "1CR", "_chapter": "5", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "103",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "73", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "73", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "77", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "78", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "104",
+        "Reading": {
+          "start": { "_book": "1CR", "_chapter": "6", "_verse": "1" },
+          "end": { "_book": "1CR", "_chapter": "6", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "105",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "81", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "81", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "88", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "88", "_verse": "final" }
+          },
+          {
+            "start": { "_book": "SL", "_chapter": "92", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "93", "_verse": "final" }
+          }
+        ]
+      },
+      {
+        "_n": "106",
+        "Reading": {
+          "start": { "_book": "1CR", "_chapter": "7", "_verse": "1" },
+          "end": { "_book": "1CR", "_chapter": "10", "_verse": "final" }
+        }
+      },
+      {
+        "_n": "107",
+        "Reading": [
+          {
+            "start": { "_book": "SL", "_chapter": "102", "_verse": "1" },
+            "end": { "_book": "SL", "_chapter": "104", "_verse": "final" }
+          }
+        ]
+      }
+    ],
+    "_name": "Plano Cronológico - Ler a Bíblia em 1 Ano"
+  }
+}
