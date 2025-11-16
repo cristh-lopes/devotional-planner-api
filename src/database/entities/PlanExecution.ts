@@ -24,27 +24,15 @@ export class PlanExecution {
   @Index()
   user!: User;
 
-  @Column({ type: "text", enum: PlanEnum })
-  plan!: PlanEnum;
-
   @Column({ type: "text", enum: VersionEnum })
   version!: VersionEnum;
 
-  @Column({ type: "date" })
-  startDate!: string; // YYYY-MM-DD
+  @Column({ type: "text", enum: PlanEnum })
+  plan!: PlanEnum;
 
-  @Column({ type: "time" })
-  scheduleTime!: string; // HH:mm
-
-  @Column({ type: "boolean", default: true })
-  autoSend!: boolean;
-
-  @Column({ type: "int", default: 1 })
-  currentDay!: number;
+  @Column({ type: "int" })
+  planDay: number;
 
   @CreateDateColumn({ type: "datetime" })
-  createdAt!: string;
-
-  @UpdateDateColumn({ type: "datetime" })
-  updatedAt!: string;
+  currentTime!: string;
 }
