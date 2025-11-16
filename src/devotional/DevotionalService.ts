@@ -41,7 +41,7 @@ export class DevotionalService {
     const passages = this.getPlanPassages(nextDay);
     const messages = this.renderer.renderPassages(passages);
 
-    // await this.saveExecution(nextDay);
+    await this.saveExecution(nextDay);
 
     return [this.user.welcomeText, ...messages];
   }
@@ -67,6 +67,7 @@ export class DevotionalService {
       version: this.user.version,
       plan: this.user.plan,
       planDay: day,
+      currentTime: new Date().toISOString(),
     });
 
     await this.execRepo.save(exec);
