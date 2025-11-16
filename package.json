@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node dist/index.js",
-    "build": "tsc"
+    "build": "tsc",
+    "seed:user": "tsx --tsconfig tsconfig.json scripts/seed-user.ts"
   },
   "repository": {
     "type": "git",
