@@ -1,56 +1,115 @@
 import qrcode from "qrcode-terminal";
 import { Client, LocalAuth, Chat } from "whatsapp-web.js";
 import cron from "node-cron";
-import { botConfig } from "./config/bot.config";
+import { AppDataSource } from "./database/data-source";
+import { User } from "./database/entities/User";
+import { PlanExecution } from "./database/entities/PlanExecution";
+import { DevotionalService } from "./devotional/DevotionalService";
+import dotenv from "dotenv";
+
+dotenv.config();
+
+const TEST_MODE = process.env.TEST_MODE === "true" || false;
 
 const client = new Client({
   authStrategy: new LocalAuth(),
-  puppeteer: { headless: true, args: ["--no-sandbox", "--disable-setuid-sandbox"] },
+  puppeteer: {
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  },
 });
 
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
-  console.log("📱 Escaneie o QR code acima para conectar ao WhatsApp.");
-});
+async function initializeBot() {
+  try {
+    await AppDataSource.initialize();
+    console.log("📦 Banco conectado.");
 
-client.on("ready", async () => {
-  console.log("✅ WhatsApp conectado com sucesso!");
+    const userRepo = AppDataSource.getRepository(User);
+    const execRepo = AppDataSource.getRepository(PlanExecution);
 
-  const sendMessage = async () => {
-    try {
-      const chats: Chat[] = await client.getChats();
-      const group = chats.find(
-        (chat) =>
-          chat.isGroup &&
-          chat.name.toLowerCase() === botConfig.groupName.toLowerCase()
-      );
+    const config = await userRepo.findOne({
+      where: {},
+      relations: { executions: true },
+    });
 
-      if (!group) {
-        console.error(`❌ Grupo '${botConfig.groupName}' não encontrado!`);
+    if (!config) {
+      console.error("❌ Nenhum usuário configurado no banco.");
+      process.exit(1);
+    }
+
+    console.log("⚙️ Configurações carregadas:", config);
+
+    client.on("qr", (qr) => {
+      qrcode.generate(qr, { small: true });
+      console.log("📱 Escaneie o QR code acima para conectar.");
+    });
+
+    client.on("ready", async () => {
+      console.log("✅ WhatsApp conectado!");
+
+      const devotionalService = new DevotionalService(userRepo, execRepo);
+
+      // -----------------------------
+      // Função para enviar devocional
+      // -----------------------------
+      const sendDevotional = async () => {
+        try {
+          console.log("📖 Gerando devocional do dia...");
+
+          const messages = await devotionalService.generateDevotionalMessages();
+          const chats: Chat[] = await client.getChats();
+
+          const group = chats.find(
+            (chat) =>
+              chat.isGroup &&
+              chat.name.toLowerCase() === config.groupName.toLowerCase()
+          );
+
+          if (!group) {
+            console.error(`❌ Grupo '${config.groupName}' não encontrado.`);
+            return;
+          }
+
+          console.log(`📤 Enviando devocional para '${group.name}'`);
+
+          for (const msg of messages) {
+            await client.sendMessage(group.id._serialized, msg);
+          }
+
+          console.log("✅ Devocional enviado.");
+        } catch (error) {
+          console.error("❌ Erro ao enviar devocional:", error);
+        }
+      };
+
+      // ---------------------------------------
+      // 🧪 MODO DE TESTE — envia imediatamente
+      // ---------------------------------------
+      if (TEST_MODE) {
+        console.log("🧪 TEST_MODE ativado → Enviando mensagem imediatamente!");
+        await sendDevotional();
         return;
       }
 
-      const message =
-        botConfig.automation && botConfig.automation.message
-          ? botConfig.automation.message
-          : "Mensagem padrão: Olá, grupo!";
+      // ---------------------------------------
+      // ⏰ MODO NORMAL — agenda pelo horário
+      // ---------------------------------------
+      const [hour, minute] = config.scheduleTime.split(":");
+      const cronExpression = `${minute} ${hour} * * *`;
 
-      await client.sendMessage(group.id._serialized, message);
-      console.log(`📤 Mensagem enviada para '${group.name}'`);
-    } catch (err) {
-      console.error("❌ Erro ao enviar mensagem:", err);
-    }
-  };
+      console.log(
+        `⏰ Agendado para ${config.scheduleTime} | CRON: ${cronExpression}`
+      );
 
-  if (botConfig.automation && botConfig.automation.enabled) {
-    console.log(
-      `⏰ Automação ativada — enviará mensagem às ${botConfig.automation.schedule}`
-    );
-    cron.schedule(botConfig.automation.schedule!, sendMessage);
-  } else {
-    console.log("⚙️ Automação desativada — enviando mensagem agora...");
-    await sendMessage();
+      cron.schedule(cronExpression, sendDevotional, {
+        timezone: "America/Sao_Paulo",
+      });
+    });
+
+    client.initialize();
+  } catch (err) {
+    console.error("❌ Erro ao inicializar o bot:", err);
   }
-});
+}
 
-client.initialize();
+initializeBot();
