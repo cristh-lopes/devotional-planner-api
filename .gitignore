@@ -36,3 +36,6 @@ Thumbs.db
 .vscode/
 .idea/
 *.swp
+
+# Banco SQLite local
+src/database/*.sqlite
