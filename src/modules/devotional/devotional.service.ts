@@ -1,11 +1,11 @@
 import { Repository } from "typeorm";
-import { User } from "../database/entities/User";
-import { PlanExecution } from "../database/entities/PlanExecution";
+import { User } from "../../database/entities/User";
+import { PlanExecution } from "../../database/entities/PlanExecution";
 
-import { PlanRepository } from "../modules/plan/plan.repository";
-import { BibleRepository } from "../modules/bible/bible.repository";
-import { PassageRenderer } from "./PassageRenderer";
-import { UserService } from "../modules/user/user.service";
+import { PlanRepository } from "../plan/plan.repository";
+import { BibleRepository } from "../bible/bible.repository";
+import { PassageRenderer } from "../../devotional/PassageRenderer";
+import { UserService } from "../user/user.service";
 
 export class DevotionalService {
   private user: User;

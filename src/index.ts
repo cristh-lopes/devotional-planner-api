@@ -4,7 +4,7 @@ import cron from "node-cron";
 import { AppDataSource } from "./database/data-source";
 import { UserModule } from "./modules/user/user.module";
 import { PlanExecution } from "./database/entities/PlanExecution";
-import { DevotionalService } from "./devotional/DevotionalService";
+import { DevotionalService } from "./modules/devotional/devotional.service";
 import dotenv from "dotenv";
 
 dotenv.config();
