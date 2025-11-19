@@ -3,7 +3,7 @@ import { User } from "../database/entities/User";
 import { PlanExecution } from "../database/entities/PlanExecution";
 
 import { PlanRepository } from "../modules/plan/plan.repository";
-import { BibleRepository } from "./BibleRepository";
+import { BibleRepository } from "../modules/bible/bible.repository";
 import { PassageRenderer } from "./PassageRenderer";
 
 export class DevotionalService {

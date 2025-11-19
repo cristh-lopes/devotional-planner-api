@@ -1,9 +1,9 @@
-import { Bible } from "./types/BibleTypes";
-import { VersionEnum } from "../database/enums/VersionEnum";
+import { Bible } from "./bible.types";
+import { VersionEnum } from "../../database/enums/VersionEnum";
 
-import nvi from "../database/bible/nvi.json";
-import acf from "../database/bible/acf.json";
-import aa from "../database/bible/aa.json";
+import nvi from "./data/nvi.json";
+import acf from "./data/acf.json";
+import aa from "./data/aa.json";
 
 const bibleMap: Record<VersionEnum, Bible> = {
   [VersionEnum.NVI]: nvi as Bible,

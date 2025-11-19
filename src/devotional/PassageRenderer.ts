@@ -1,4 +1,4 @@
-import { Bible, Verse } from "./types/BibleTypes";
+import { Bible, Verse } from "../modules/bible/bible.types";
 import { Passage } from "../modules/plan/plan.types";
 
 export class PassageRenderer {
