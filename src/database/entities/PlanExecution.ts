@@ -8,7 +8,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { User } from "./User";
-import { VersionEnum } from "../enums/VersionEnum";
+import { VersionEnum } from "../../modules/bible/bible.enum";
 import { PlanEnum } from "../enums/PlanEnum";
 
 @Entity({ name: "user_plan_executions" })

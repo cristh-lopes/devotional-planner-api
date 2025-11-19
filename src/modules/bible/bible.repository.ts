@@ -1,5 +1,5 @@
 import { Bible } from "./bible.types";
-import { VersionEnum } from "../../database/enums/VersionEnum";
+import { VersionEnum } from "./bible.enum";
 
 import nvi from "./data/nvi.json";
 import acf from "./data/acf.json";

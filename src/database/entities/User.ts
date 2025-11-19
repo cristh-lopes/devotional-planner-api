@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { PlanExecution } from "./PlanExecution";
 import { PlanEnum } from "../enums/PlanEnum";
-import { VersionEnum } from "../enums/VersionEnum";
+import { VersionEnum } from "../../modules/bible/bible.enum";
 
 @Entity({ name: "users" })
 export class User {

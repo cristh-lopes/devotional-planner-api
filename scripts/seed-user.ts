@@ -3,7 +3,7 @@ import readline from "readline";
 import { AppDataSource } from "../src/database/data-source";
 import { User } from "../src/database/entities/User";
 import { PlanEnum } from "../src/database/enums/PlanEnum";
-import { VersionEnum } from "../src/database/enums/VersionEnum";
+import { VersionEnum } from "../src/modules/bible/bible.enum";
 
 const rl = readline.createInterface({
   input: process.stdin,
