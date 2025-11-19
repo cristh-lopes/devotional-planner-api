@@ -1,5 +1,5 @@
 import { Bible, Verse } from "./types/BibleTypes";
-import { Passage } from "./types/PlanTypes";
+import { Passage } from "../modules/plan/plan.types";
 
 export class PassageRenderer {
   constructor(private bible: Bible) {}

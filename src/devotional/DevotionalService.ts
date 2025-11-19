@@ -2,7 +2,7 @@ import { Repository } from "typeorm";
 import { User } from "../database/entities/User";
 import { PlanExecution } from "../database/entities/PlanExecution";
 
-import { PlanRepository } from "./PlanRepository";
+import { PlanRepository } from "../modules/plan/plan.repository";
 import { BibleRepository } from "./BibleRepository";
 import { PassageRenderer } from "./PassageRenderer";
 

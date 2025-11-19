@@ -1,5 +1,5 @@
-import { Plan } from "./types/PlanTypes";
-import chronological from "../database/plan/chronological.json";
+import chronological from "./data/chronological.json";
+import { Plan } from "./plan.types";
 
 const planMap: Record<string, Plan> = {
   chronological: chronological as Plan,
