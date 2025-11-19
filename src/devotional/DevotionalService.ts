@@ -5,6 +5,7 @@ import { PlanExecution } from "../database/entities/PlanExecution";
 import { PlanRepository } from "../modules/plan/plan.repository";
 import { BibleRepository } from "../modules/bible/bible.repository";
 import { PassageRenderer } from "./PassageRenderer";
+import { UserService } from "../modules/user/user.service";
 
 export class DevotionalService {
   private user: User;
@@ -13,25 +14,16 @@ export class DevotionalService {
   private renderer: PassageRenderer;
 
   constructor(
-    private userRepo: Repository<User>,
+    private _userService: UserService,
     private execRepo: Repository<PlanExecution>
-  ) {}
+  ) {
+  }
 
   private async init() {
-    this.user = await this.loadUser();
+    this.user = await this._userService.load();
     this.bible = BibleRepository.get(this.user.version);
     this.plan = PlanRepository.get(this.user.plan);
     this.renderer = new PassageRenderer(this.bible);
-  }
-
-  private async loadUser(): Promise<User> {
-    const user = await this.userRepo.findOne({
-      where: {},
-      relations: { executions: true },
-    });
-
-    if (!user) throw new Error("Usuário não encontrado.");
-    return user;
   }
 
   async generateDevotionalMessages(): Promise<string[]> {
@@ -55,7 +47,7 @@ export class DevotionalService {
   }
 
   private getPlanPassages(day: number) {
-    const entry = this.plan._days.find(d => Number(d._n) === day);
+    const entry = this.plan._days.find((d) => Number(d._n) === day);
     if (!entry) throw new Error(`Dia ${day} não encontrado.`);
 
     return Array.isArray(entry._passage) ? entry._passage : [entry._passage];

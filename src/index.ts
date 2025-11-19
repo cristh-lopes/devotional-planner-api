@@ -2,7 +2,7 @@ import qrcode from "qrcode-terminal";
 import { Client, LocalAuth, Chat } from "whatsapp-web.js";
 import cron from "node-cron";
 import { AppDataSource } from "./database/data-source";
-import { User } from "./database/entities/User";
+import { UserModule } from "./modules/user/user.module";
 import { PlanExecution } from "./database/entities/PlanExecution";
 import { DevotionalService } from "./devotional/DevotionalService";
 import dotenv from "dotenv";
@@ -24,18 +24,11 @@ async function initializeBot() {
     await AppDataSource.initialize();
     console.log("📦 Banco conectado.");
 
-    const userRepo = AppDataSource.getRepository(User);
+    const { service: userService } = UserModule.build();
+
     const execRepo = AppDataSource.getRepository(PlanExecution);
 
-    const config = await userRepo.findOne({
-      where: {},
-      relations: { executions: true },
-    });
-
-    if (!config) {
-      console.error("❌ Nenhum usuário configurado no banco.");
-      process.exit(1);
-    }
+    const config = await userService.load();
 
     console.log("⚙️ Configurações carregadas:", config);
 
@@ -47,7 +40,7 @@ async function initializeBot() {
     client.on("ready", async () => {
       console.log("✅ WhatsApp conectado!");
 
-      const devotionalService = new DevotionalService(userRepo, execRepo);
+      const devotionalService = new DevotionalService(userService, execRepo);
 
       // -----------------------------
       // Função para enviar devocional
@@ -57,7 +50,7 @@ async function initializeBot() {
           console.log("📖 Gerando devocional do dia...");
 
           const messages = await devotionalService.generateDevotionalMessages();
-          const chats: Chat[] = await client.getChats();
+          const chats = await client.getChats();
 
           const group = chats.find(
             (chat) =>
