@@ -2,62 +2,41 @@ import { Repository } from "typeorm";
 import { User } from "../../database/entities/User";
 import { PlanExecution } from "../../database/entities/PlanExecution";
 
-import { PlanRepository } from "../plan/plan.repository";
 import { BibleRepository } from "../bible/bible.repository";
 import { PassageRenderer } from "../../devotional/PassageRenderer";
-import { UserService } from "../user/user.service";
+import { PlanService } from "../plan/plan.service";
 
 export class DevotionalService {
   private user: User;
   private bible;
-  private plan;
   private renderer: PassageRenderer;
 
   constructor(
-    private _userService: UserService,
+    private _planService: PlanService,
     private execRepo: Repository<PlanExecution>
-  ) {
-  }
+  ) {}
 
   private async init() {
-    this.user = await this._userService.load();
     this.bible = BibleRepository.get(this.user.version);
-    this.plan = PlanRepository.get(this.user.plan);
     this.renderer = new PassageRenderer(this.bible);
   }
 
   async generateDevotionalMessages(): Promise<string[]> {
-    if (!this.user) await this.init();
+    const { day, user } = await this._planService.getNextPlanData();
+    const messages = this.renderer.renderPassages(
+      Array.isArray(day._passage) ? day._passage : [day._passage]
+    );
 
-    const nextDay = this.getNextPlanDay();
-    const passages = this.getPlanPassages(nextDay);
-    const messages = this.renderer.renderPassages(passages);
-
-    await this.saveExecution(nextDay);
+    await this.saveExecution(Number(day._n), user);
 
     return [this.user.welcomeText, ...messages];
   }
 
-  private getNextPlanDay(): number {
-    const ex = this.user.executions;
-    if (!ex?.length) return 1;
-
-    const last = ex.sort((a, b) => b.planDay - a.planDay)[0];
-    return last.planDay + 1;
-  }
-
-  private getPlanPassages(day: number) {
-    const entry = this.plan._days.find((d) => Number(d._n) === day);
-    if (!entry) throw new Error(`Dia ${day} não encontrado.`);
-
-    return Array.isArray(entry._passage) ? entry._passage : [entry._passage];
-  }
-
-  private async saveExecution(day: number) {
+  private async saveExecution(day: number, user: User) {
     const exec = this.execRepo.create({
-      user: this.user,
-      version: this.user.version,
-      plan: this.user.plan,
+      user: user,
+      version: user.version,
+      plan: user.plan,
       planDay: day,
       currentTime: new Date().toISOString(),
     });
