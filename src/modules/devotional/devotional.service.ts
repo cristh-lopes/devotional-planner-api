@@ -2,13 +2,10 @@ import { Repository } from "typeorm";
 import { User } from "../../database/entities/User";
 import { PlanExecution } from "../../database/entities/PlanExecution";
 
-import { BibleRepository } from "../bible/bible.repository";
 import { PassageRenderer } from "../../devotional/PassageRenderer";
 import { PlanService } from "../plan/plan.service";
 
 export class DevotionalService {
-  private user: User;
-  private bible;
   private renderer: PassageRenderer;
 
   constructor(
@@ -16,20 +13,18 @@ export class DevotionalService {
     private execRepo: Repository<PlanExecution>
   ) {}
 
-  private async init() {
-    this.bible = BibleRepository.get(this.user.version);
-    this.renderer = new PassageRenderer(this.bible);
-  }
-
   async generateDevotionalMessages(): Promise<string[]> {
     const { day, user } = await this._planService.getNextPlanData();
+    if(this.renderer === undefined) {
+      this.renderer = new PassageRenderer(user.version);
+    }
     const messages = this.renderer.renderPassages(
       Array.isArray(day._passage) ? day._passage : [day._passage]
     );
 
     await this.saveExecution(Number(day._n), user);
 
-    return [this.user.welcomeText, ...messages];
+    return [user.welcomeText, ...messages];
   }
 
   private async saveExecution(day: number, user: User) {
