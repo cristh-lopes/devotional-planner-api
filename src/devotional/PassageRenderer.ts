@@ -1,8 +1,13 @@
-import { Bible, Verse } from "../modules/bible/bible.types";
+import { VersionEnum } from "../modules/bible/bible.enum";
+import { BibleRepository } from "../modules/bible/bible.repository";
+import { Bible } from "../modules/bible/bible.types";
 import { Passage } from "../modules/plan/plan.types";
 
 export class PassageRenderer {
-  constructor(private bible: Bible) {}
+  private _bible: Bible;
+  constructor(bible: VersionEnum) {
+    this._bible = BibleRepository.get(bible);
+  }
 
   renderPassages(passages: Passage[]): string[] {
     return passages.map((p) =>
@@ -25,7 +30,7 @@ export class PassageRenderer {
     endChapter: number,
     endVerse: string
   ): string {
-    const books = this.bible._bible._book;
+    const books = this._bible._bible._book;
 
     const bookStart = books.find(
       (b) => b._abbrev.toLowerCase() === startBook.toLowerCase()
