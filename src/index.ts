@@ -6,6 +6,7 @@ import { UserModule } from "./modules/user/user.module";
 import { PlanExecution } from "./database/entities/PlanExecution";
 import { DevotionalService } from "./modules/devotional/devotional.service";
 import dotenv from "dotenv";
+import { PlanService } from "./modules/plan/plan.service";
 
 dotenv.config();
 
@@ -26,6 +27,8 @@ async function initializeBot() {
 
     const { service: userService } = UserModule.build();
 
+    const planService = new PlanService(userService);
+
     const execRepo = AppDataSource.getRepository(PlanExecution);
 
     const config = await userService.load();
@@ -40,7 +43,7 @@ async function initializeBot() {
     client.on("ready", async () => {
       console.log("✅ WhatsApp conectado!");
 
-      const devotionalService = new DevotionalService(userService, execRepo);
+      const devotionalService = new DevotionalService(planService, execRepo);
 
       // -----------------------------
       // Função para enviar devocional
