@@ -33,6 +33,9 @@ export class User {
   @Column({ type: "time" })
   scheduleTime!: string;
 
+  @Column({ type: "varchar", length: 50, nullable: true })
+  groupId?: string;
+
   @OneToMany(() => PlanExecution, (upe) => upe.user, { cascade: true })
   executions?: PlanExecution[];
 }

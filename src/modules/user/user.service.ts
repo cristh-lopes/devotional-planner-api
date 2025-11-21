@@ -52,4 +52,10 @@ export class UserService {
   clearCache() {
     this.cache = null;
   }
+
+  async saveGroupId(groupId: string) {
+    const user = await this.load();
+    user.groupId = groupId;
+    await this.repo.save(user);
+  }
 }
