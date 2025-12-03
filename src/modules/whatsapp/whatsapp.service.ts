@@ -40,6 +40,8 @@ export class WhatsappService {
     );
 
     if (!group) throw `❌ Grupo '${user.groupName}' não encontrado.`;
+
+    this._userService.saveGroupId(group.id._serialized);
     return group;
   }
 
