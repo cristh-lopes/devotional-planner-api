@@ -1,11 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  OneToMany,
-  CreateDateColumn,
-  UpdateDateColumn,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { PlanExecution } from "./PlanExecution";
 import { PlanEnum } from "../../modules/plan/plan.enum";
 import { VersionEnum } from "../../modules/bible/bible.enum";
