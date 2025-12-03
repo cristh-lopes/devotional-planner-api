@@ -1,9 +1,10 @@
-import { Repository } from "typeorm";
 import { User } from "../../database/entities/User";
-import { PlanExecution } from "../../database/entities/PlanExecution";
+import cron from "node-cron";
 
 import { PassageRenderer } from "../../devotional/PassageRenderer";
 import { PlanService } from "../plan/plan.service";
+import { Repository } from "typeorm";
+import { PlanExecution } from "../../database/entities/PlanExecution";
 
 export class DevotionalService {
   private renderer: PassageRenderer;
@@ -13,21 +14,52 @@ export class DevotionalService {
     private execRepo: Repository<PlanExecution>
   ) {}
 
-  async generateDevotionalMessages(): Promise<string[]> {
+  async generateDevotionalMessages(): Promise<{
+    day: number;
+    user: User;
+    messages: string[];
+  }> {
     const { day, user } = await this._planService.getNextPlanData();
-    if(this.renderer === undefined) {
+    if (this.renderer === undefined) {
       this.renderer = new PassageRenderer(user.version);
     }
     const messages = this.renderer.renderPassages(
       Array.isArray(day._passage) ? day._passage : [day._passage]
     );
 
-    await this.saveExecution(Number(day._n), user);
-
-    return [user.welcomeText, ...messages];
+    return {
+      user,
+      day: Number(day._n),
+      messages: [user.welcomeText, ...messages],
+    };
   }
 
-  private async saveExecution(day: number, user: User) {
+  async devotinalSchedule(fn: () => Promise<void>, timeSchedule: string) {
+    const TEST_MODE = process.env.TEST_MODE === "true" || false;
+
+    // ---------------------------------------
+    // 🧪 MODO DE TESTE — envia imediatamente
+    // ---------------------------------------
+    if (TEST_MODE) {
+      console.log("🧪 TEST_MODE ativado → Enviando mensagem imediatamente!");
+      await fn();
+      return;
+    }
+
+    // ---------------------------------------
+    // ⏰ MODO NORMAL — agenda pelo horário
+    // ---------------------------------------
+    const [hour, minute] = timeSchedule.split(":");
+    const cronExpression = `${minute} ${hour} * * *`;
+
+    console.log(`⏰ Agendado para ${timeSchedule} | CRON: ${cronExpression}`);
+
+    cron.schedule(cronExpression, fn, {
+      timezone: "America/Sao_Paulo",
+    });
+  }
+
+  async saveExecution(day: number, user: User) {
     const exec = this.execRepo.create({
       user: user,
       version: user.version,

@@ -9,8 +9,6 @@ import { WhatsappService } from "./modules/whatsapp/whatsapp.service";
 
 dotenv.config();
 
-const TEST_MODE = process.env.TEST_MODE === "true" || false;
-
 async function initializeBot() {
   try {
     await AppDataSource.initialize();
@@ -24,8 +22,6 @@ async function initializeBot() {
 
     const config = await userService.load();
 
-    console.log("⚙️ Configurações carregadas:", config);
-
     const whatsappService = new WhatsappService(userService);
 
     const ready = async () => {
@@ -38,8 +34,10 @@ async function initializeBot() {
         try {
           console.log("📖 Gerando devocional do dia...");
 
-          const messages = await devotionalService.generateDevotionalMessages();
-          whatsService.sendMessages(messages);
+          const { day, user, messages } =
+            await devotionalService.generateDevotionalMessages();
+          await whatsService.sendMessages(messages);
+          await devotionalService.saveExecution(day, user);
 
           console.log("✅ Devocional enviado.");
         } catch (error) {
@@ -47,28 +45,10 @@ async function initializeBot() {
         }
       };
 
-      // ---------------------------------------
-      // 🧪 MODO DE TESTE — envia imediatamente
-      // ---------------------------------------
-      if (TEST_MODE) {
-        console.log("🧪 TEST_MODE ativado → Enviando mensagem imediatamente!");
-        await sendDevotional();
-        return;
-      }
-
-      // ---------------------------------------
-      // ⏰ MODO NORMAL — agenda pelo horário
-      // ---------------------------------------
-      const [hour, minute] = config.scheduleTime.split(":");
-      const cronExpression = `${minute} ${hour} * * *`;
-
-      console.log(
-        `⏰ Agendado para ${config.scheduleTime} | CRON: ${cronExpression}`
+      await devotionalService.devotinalSchedule(
+        sendDevotional,
+        config.scheduleTime
       );
-
-      cron.schedule(cronExpression, sendDevotional, {
-        timezone: "America/Sao_Paulo",
-      });
     };
 
     whatsappService.clientReady(ready);
