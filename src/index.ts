@@ -1,4 +1,3 @@
-import cron from "node-cron";
 import { AppDataSource } from "./database/data-source";
 import { UserModule } from "./modules/user/user.module";
 import { PlanExecution } from "./database/entities/PlanExecution";
