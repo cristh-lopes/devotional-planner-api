@@ -1,0 +1,154 @@
+{
+  "_name": "João — 21 Dias",
+  "_description": "Plano de leitura bíblica do evangelho em 21 dias, um capítulo por dia.",
+  "_meta": "Created by Devotional Planner",
+  "_days": [
+    {
+      "_n": "1",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "1", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "1", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "2",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "2", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "2", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "3",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "3", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "3", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "4",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "4", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "4", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "5",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "5", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "5", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "6",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "6", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "6", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "7",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "7", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "7", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "8",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "8", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "8", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "9",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "9", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "9", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "10",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "10", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "10", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "11",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "11", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "11", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "12",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "12", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "12", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "13",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "13", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "13", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "14",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "14", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "14", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "15",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "15", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "15", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "16",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "16", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "16", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "17",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "17", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "17", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "18",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "18", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "18", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "19",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "19", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "19", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "20",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "20", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "20", "_verse": "final" }
+      }
+    },
+    {
+      "_n": "21",
+      "_passage": {
+        "_start": { "_book": "JO", "_chapter": "21", "_verse": "1" },
+        "_end": { "_book": "JO", "_chapter": "21", "_verse": "final" }
+      }
+    }
+  ]
+}
