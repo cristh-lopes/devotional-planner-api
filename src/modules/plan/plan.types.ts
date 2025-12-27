@@ -1,5 +1,8 @@
 export interface Plan {
   _days: Day[];
+  _name: string;
+  _description: string;
+  _meta: string;
 }
 
 export interface Day {
