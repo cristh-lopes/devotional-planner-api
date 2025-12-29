@@ -5,6 +5,7 @@ import { PassageRenderer } from "../../devotional/PassageRenderer";
 import { PlanService } from "../plan/plan.service";
 import { Repository } from "typeorm";
 import { PlanExecution } from "../../database/entities/PlanExecution";
+import { Day, Passage } from "../plan/plan.types";
 
 export class DevotionalService {
   private renderer: PassageRenderer;
@@ -30,8 +31,26 @@ export class DevotionalService {
     return {
       user,
       day: Number(day._n),
-      messages: [user.welcomeText, ...messages],
+      messages: [await this.getWelcomeMessage(user, day), ...messages],
     };
+  }
+
+  async getWelcomeMessage(user: User, day: Day): Promise<string> {
+    const text = user.welcomeText + "\n\n*PASSAGENS DE HOJE:*\n";
+    const format = (passage: Passage) => {
+      if (passage._start._book === passage._end._book) {
+        return passage._start._chapter === passage._end._chapter
+          ? `- ${passage._start._book} ${passage._start._chapter}:${passage._start._verse}-${passage._end._verse}`
+          : `- ${passage._start._book} ${passage._start._chapter}:${passage._start._verse} - ${passage._end._chapter}:${passage._end._verse}`;
+      } else
+        return `- ${passage._start._book} ${passage._start._chapter}:${passage._start._verse} - ${passage._end._book} ${passage._end._chapter}:${passage._end._verse}`;
+    };
+    return (
+      text +
+      (Array.isArray(day._passage)
+        ? day._passage.map(format).join("\n")
+        : format(day._passage))
+    );
   }
 
   async devotinalSchedule(fn: () => Promise<void>, timeSchedule: string) {
