@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/index.ts",
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "build": "tsc",
     "seed:user": "tsx --tsconfig tsconfig.json scripts/seed-user.ts",
     "migration:run": "typeorm migration:run -d dist/src/database/data-source.js"
