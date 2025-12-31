@@ -67,8 +67,8 @@ export class PassageRenderer {
         text += `*${verse._number}.* ${verse._text}\n`;
       }
 
-      text += `*───────────────*\n`;
       if (stop) break;
+      text += `*───────────────*\n`;
     }
 
     return text.trim();
