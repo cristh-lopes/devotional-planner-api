@@ -1,7 +1,7 @@
-import { VersionEnum } from "../modules/bible/bible.enum";
-import { BibleRepository } from "../modules/bible/bible.repository";
-import { Bible } from "../modules/bible/bible.types";
-import { Passage } from "../modules/plan/plan.types";
+import { VersionEnum } from "../bible/bible.enum";
+import { BibleRepository } from "../bible/bible.repository";
+import { Bible } from "../bible/bible.types";
+import { Passage } from "../plan/plan.types";
 
 export class PassageRenderer {
   private _bible: Bible;

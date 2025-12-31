@@ -1,7 +1,7 @@
 import { User } from "../../database/entities/User";
 import cron from "node-cron";
 
-import { PassageRenderer } from "../../devotional/PassageRenderer";
+import { PassageRenderer } from "./PassageRenderer";
 import { PlanService } from "../plan/plan.service";
 import { Repository } from "typeorm";
 import { PlanExecution } from "../../database/entities/PlanExecution";
