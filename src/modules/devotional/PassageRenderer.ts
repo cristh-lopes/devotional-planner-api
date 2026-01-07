@@ -9,8 +9,9 @@ export class PassageRenderer {
     this._bible = BibleRepository.get(bible);
   }
 
-  renderPassages(passages: Passage[]): string[] {
-    return passages.map((p) =>
+  renderPassages(passages: Passage | Passage[]): string[] {
+    const passagesArray = Array.isArray(passages) ? passages : [passages];
+    return passagesArray.map((p) =>
       this.render(
         p._start._book,
         Number(p._start._chapter),

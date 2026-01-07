@@ -5,51 +5,53 @@ import { PassageRenderer } from "./PassageRenderer";
 import { PlanService } from "../plan/plan.service";
 import { Repository } from "typeorm";
 import { PlanExecution } from "../../database/entities/PlanExecution";
-import { Day, Passage } from "../plan/plan.types";
+import { Passage } from "../plan/plan.types";
+import { CanvasService } from "../canvas/canvas.service";
 
 export class DevotionalService {
   private renderer: PassageRenderer;
 
   constructor(
     private _planService: PlanService,
+    private _canvasService: CanvasService,
     private execRepo: Repository<PlanExecution>
   ) {}
 
-  async generateDevotionalMessages(): Promise<{
+  async generateDevotional(): Promise<{
     day: number;
     user: User;
     messages: string[];
   }> {
     const { day, user } = await this._planService.getNextPlanData();
-    if (this.renderer === undefined) {
+
+    if (!this.renderer) {
       this.renderer = new PassageRenderer(user.version);
     }
-    const messages = this.renderer.renderPassages(
-      Array.isArray(day._passage) ? day._passage : [day._passage]
-    );
+
+    const formattedPassages = this.formatPassages(day._passage);
+
+    const welcomeMessage =
+      user.welcomeText +
+      "\n\n*PASSAGENS DE HOJE:*\n" +
+      formattedPassages.join("\n");
+
+    const messages = this.renderer.renderPassages(day._passage);
 
     return {
       user,
       day: Number(day._n),
-      messages: [await this.getWelcomeMessage(user, day), ...messages],
+      messages: [welcomeMessage, ...messages],
     };
   }
 
-  async getWelcomeMessage(user: User, day: Day): Promise<string> {
-    const text = user.welcomeText + "\n\n*PASSAGENS DE HOJE:*\n";
-    const format = (passage: Passage) => {
-      if (passage._start._book === passage._end._book) {
-        return passage._start._chapter === passage._end._chapter
-          ? `- ${passage._start._book} ${passage._start._chapter}:${passage._start._verse}-${passage._end._verse}`
-          : `- ${passage._start._book} ${passage._start._chapter}:${passage._start._verse} - ${passage._end._chapter}:${passage._end._verse}`;
-      } else
-        return `- ${passage._start._book} ${passage._start._chapter}:${passage._start._verse} - ${passage._end._book} ${passage._end._chapter}:${passage._end._verse}`;
-    };
-    return (
-      text +
-      (Array.isArray(day._passage)
-        ? day._passage.map(format).join("\n")
-        : format(day._passage))
+  formatPassages(passages: Passage[] | Passage): string[] {
+    const passagesArray = Array.isArray(passages) ? passages : [passages];
+    return passagesArray.map((passage) =>
+      passage._start._book === passage._end._book
+        ? passage._start._chapter === passage._end._chapter
+          ? `${passage._start._book} ${passage._start._chapter}:${passage._start._verse}-${passage._end._verse}`
+          : `${passage._start._book} ${passage._start._chapter}:${passage._start._verse} - ${passage._end._chapter}:${passage._end._verse}`
+        : `${passage._start._book} ${passage._start._chapter}:${passage._start._verse} - ${passage._end._book} ${passage._end._chapter}:${passage._end._verse}`
     );
   }
 
