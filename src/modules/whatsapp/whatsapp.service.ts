@@ -1,4 +1,4 @@
-import { Client, LocalAuth } from "whatsapp-web.js";
+import { Client, LocalAuth, MessageMedia } from "whatsapp-web.js";
 import { UserService } from "../user/user.service";
 import qrcode from "qrcode-terminal";
 
@@ -51,5 +51,17 @@ export class WhatsappService {
     for (const msg of messages) {
       await this._client.sendMessage(group.id._serialized, msg);
     }
+  }
+
+  async sendImage(imageBuffer: Buffer, caption?: string) {
+    const group = await this.getGroup();
+
+    const media = new MessageMedia(
+      "image/png",
+      imageBuffer.toString("base64"),
+      "devocional.png"
+    );
+
+    await this._client.sendMessage(group.id._serialized, media, { caption });
   }
 }
