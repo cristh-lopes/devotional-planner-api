@@ -21,6 +21,8 @@ export class DevotionalService {
     day: number;
     user: User;
     messages: string[];
+    welcomeMessage: string;
+    image: Buffer;
   }> {
     const { day, user } = await this._planService.getNextPlanData();
 
@@ -35,12 +37,19 @@ export class DevotionalService {
       "\n\n*PASSAGENS DE HOJE:*\n" +
       formattedPassages.join("\n");
 
+    const image = await this._canvasService.generateDailyImage({
+      dayNumber: Number(day._n),
+      passages: formattedPassages,
+    });
+
     const messages = this.renderer.renderPassages(day._passage);
 
     return {
       user,
       day: Number(day._n),
-      messages: [welcomeMessage, ...messages],
+      messages,
+      welcomeMessage,
+      image,
     };
   }
 

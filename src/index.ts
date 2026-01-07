@@ -5,6 +5,7 @@ import { DevotionalService } from "./modules/devotional/devotional.service";
 import dotenv from "dotenv";
 import { PlanService } from "./modules/plan/plan.service";
 import { WhatsappService } from "./modules/whatsapp/whatsapp.service";
+import { CanvasService } from "./modules/canvas/canvas.service";
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ async function initializeBot() {
     const { service: userService } = UserModule.build();
 
     const planService = new PlanService(userService);
+    const canvasService = new CanvasService();
 
     const execRepo = AppDataSource.getRepository(PlanExecution);
 
@@ -30,7 +32,11 @@ async function initializeBot() {
       const whatsService = whatsappService;
       console.log("\t✅ WhatsApp conectado!");
 
-      const devotionalService = new DevotionalService(planService, execRepo);
+      const devotionalService = new DevotionalService(
+        planService,
+        canvasService,
+        execRepo
+      );
 
       const sendDevotional = async () => {
         try {
@@ -38,6 +44,11 @@ async function initializeBot() {
 
           const devotional = await devotionalService.generateDevotional();
           console.log("📨 Enviando mensagens para o grupo...");
+
+          await whatsService.sendImage(
+            devotional.image,
+            devotional.welcomeMessage
+          );
 
           await whatsService.sendMessages(devotional.messages);
           await devotionalService.saveExecution(
