@@ -35,8 +35,7 @@ export class WhatsappService {
     const chats = await this._client.getChats();
 
     const group = chats.find(
-      (chat) =>
-        chat.isGroup && chat.name.toLowerCase() === user.groupName.toLowerCase()
+      (chat) => chat.isGroup && chat.name.includes(user.groupName)
     );
 
     if (!group) throw `❌ Grupo '${user.groupName}' não encontrado.`;
