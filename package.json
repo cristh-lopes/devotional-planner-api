@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "start": "node dist/src/index.js",
-    "build": "tsc",
+    "build": "tsc && cp -r src/modules/canvas/assets dist/src/modules/canvas/assets",
     "seed:user": "tsx --tsconfig tsconfig.json scripts/seed-user.ts",
     "migration:run": "typeorm migration:run -d dist/src/database/data-source.js"
   },
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/cristh-lopes/devotional-planner-api#readme",
   "dependencies": {
+    "canvas": "^3.2.0",
     "node-cron": "^4.2.1",
     "qrcode-terminal": "^0.12.0",
     "reflect-metadata": "^0.2.2",
