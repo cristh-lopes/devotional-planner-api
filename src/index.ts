@@ -10,9 +10,12 @@ dotenv.config();
 
 async function initializeBot() {
   try {
+    console.log("🚀 Iniciando o Devotional Planner Bot...");
+    console.log("📦 Conectando ao banco de dados...");
     await AppDataSource.initialize();
-    console.log("📦 Banco conectado.");
+    console.log("\t✅ Banco de dados conectado.");
 
+    console.log("📱 Configurando o WhatsApp...");
     const { service: userService } = UserModule.build();
 
     const planService = new PlanService(userService);
@@ -25,7 +28,7 @@ async function initializeBot() {
 
     const ready = async () => {
       const whatsService = whatsappService;
-      console.log("✅ WhatsApp conectado!");
+      console.log("\t✅ WhatsApp conectado!");
 
       const devotionalService = new DevotionalService(planService, execRepo);
 
@@ -33,10 +36,14 @@ async function initializeBot() {
         try {
           console.log("📖 Gerando devocional do dia...");
 
-          const { day, user, messages } =
-            await devotionalService.generateDevotionalMessages();
-          await whatsService.sendMessages(messages);
-          await devotionalService.saveExecution(day, user);
+          const devotional = await devotionalService.generateDevotional();
+          console.log("📨 Enviando mensagens para o grupo...");
+
+          await whatsService.sendMessages(devotional.messages);
+          await devotionalService.saveExecution(
+            devotional.day,
+            devotional.user
+          );
 
           console.log("✅ Devocional enviado.");
         } catch (error) {
