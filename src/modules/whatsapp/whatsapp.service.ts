@@ -6,6 +6,7 @@ import makeWASocket, {
 import qrcode from "qrcode-terminal";
 import { UserService } from "../user/user.service";
 import pino from "pino";
+import { User } from "../../database/entities/User";
 
 export class WhatsappService {
   private sock: ReturnType<typeof makeWASocket> | null = null;
@@ -66,10 +67,8 @@ export class WhatsappService {
     });
   }
 
-  private async getGroupId(): Promise<string> {
+  async getGroupId(user: User): Promise<string> {
     if (!this.sock) throw new Error("WhatsApp não inicializado");
-
-    const user = await this.userService.load();
 
     if (user.groupId) return user.groupId;
 
@@ -81,23 +80,19 @@ export class WhatsappService {
 
     if (!group) throw new Error(`❌ Grupo '${user.groupName}' não encontrado`);
 
-    await this.userService.saveGroupId(group.id);
+    await this.userService.saveGroupId(user, group.id);
     return group.id;
   }
 
-  async sendMessages(messages: string[]) {
+  async sendMessages(groupId: string, messages: string[]) {
     if (!this.ready || !this.sock) throw new Error("WhatsApp não conectado");
-
-    const groupId = await this.getGroupId();
 
     for (const msg of messages)
       await this.sock.sendMessage(groupId, { text: msg });
   }
 
-  async sendImage(imageBuffer: Buffer, caption?: string) {
+  async sendImage(groupId: string, imageBuffer: Buffer, caption?: string) {
     if (!this.ready || !this.sock) throw new Error("WhatsApp não conectado");
-
-    const groupId = await this.getGroupId();
 
     await this.sock.sendMessage(groupId, {
       image: imageBuffer,

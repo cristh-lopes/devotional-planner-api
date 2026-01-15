@@ -7,9 +7,10 @@ import { Repository } from "typeorm";
 import { PlanExecution } from "../../database/entities/PlanExecution";
 import { Passage } from "../plan/plan.types";
 import { CanvasService } from "../canvas/canvas.service";
+import { VersionEnum } from "../bible/bible.enum";
 
 export class DevotionalService {
-  private renderer: PassageRenderer;
+  private renderers = new Map<VersionEnum, PassageRenderer>();
 
   constructor(
     private _planService: PlanService,
@@ -17,18 +18,17 @@ export class DevotionalService {
     private execRepo: Repository<PlanExecution>
   ) {}
 
-  async generateDevotional(): Promise<{
-    day: number;
+  async generateDevotional(user: User): Promise<{
+    dayNumber: number;
     user: User;
     messages: string[];
     welcomeMessage: string;
     image: Buffer;
   }> {
-    const { day, user } = await this._planService.getNextPlanData();
+    const { day } = await this._planService.getNextPlanData(user);
 
-    if (!this.renderer) {
-      this.renderer = new PassageRenderer(user.version);
-    }
+    const dayNumber = Number(day._n);
+    const renderer = this.getRenderer(user.version);
 
     const formattedPassages = this.formatPassages(day._passage);
 
@@ -38,19 +38,25 @@ export class DevotionalService {
       formattedPassages.join("\n");
 
     const image = await this._canvasService.generateDailyImage({
-      dayNumber: Number(day._n),
+      dayNumber,
       passages: formattedPassages,
     });
 
-    const messages = this.renderer.renderPassages(day._passage);
+    const messages = renderer.renderPassages(day._passage);
 
     return {
       user,
-      day: Number(day._n),
+      dayNumber,
       messages,
       welcomeMessage,
       image,
     };
+  }
+
+  private getRenderer(version: VersionEnum): PassageRenderer {
+    if (!this.renderers.has(version))
+      this.renderers.set(version, new PassageRenderer(version));
+    return this.renderers.get(version)!;
   }
 
   formatPassages(passages: Passage[] | Passage): string[] {
@@ -67,34 +73,30 @@ export class DevotionalService {
   async devotinalSchedule(fn: () => Promise<void>, timeSchedule: string) {
     const TEST_MODE = process.env.TEST_MODE === "true" || false;
 
-    // ---------------------------------------
-    // 🧪 MODO DE TESTE — envia imediatamente
-    // ---------------------------------------
     if (TEST_MODE) {
-      console.log("🧪 TEST_MODE ativado → Enviando mensagem imediatamente!");
+      console.log(
+        `🧪 TEST_MODE → Enviando para os usuários programados(${timeSchedule})`
+      );
       await fn();
       return;
     }
 
-    // ---------------------------------------
-    // ⏰ MODO NORMAL — agenda pelo horário
-    // ---------------------------------------
     const [hour, minute] = timeSchedule.split(":");
     const cronExpression = `${minute} ${hour} * * *`;
 
-    console.log(`⏰ Agendado para ${timeSchedule} | CRON: ${cronExpression}`);
+    console.log(`⏰ Agendado ${timeSchedule}`);
 
     cron.schedule(cronExpression, fn, {
       timezone: "America/Sao_Paulo",
     });
   }
 
-  async saveExecution(day: number, user: User) {
+  async saveExecution(dayNumber: number, user: User) {
     const exec = this.execRepo.create({
-      user: user,
+      user,
       version: user.version,
       plan: user.plan,
-      planDay: day,
+      planDay: dayNumber,
       currentTime: new Date().toISOString(),
     });
 

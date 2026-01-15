@@ -1,61 +1,51 @@
 import { UserRepository } from "./user.repository";
 import { User } from "../../database/entities/User";
 
+export interface UserConfig {
+  timeScheduled: string;
+  user: User[];
+}
+
 export class UserService {
-  private cache: User | null = null;
+  private cache: UserConfig[] | null = null;
 
   constructor(private repo: UserRepository) {}
 
-  async load(): Promise<User> {
+  async loadConfigs(): Promise<UserConfig[]> {
     if (this.cache) return this.cache;
 
-    const user = await this.repo.findOne();
+    const users = await this.repo.findAll();
 
-    if (!user) {
+    if (!users || users.length === 0)
       throw new Error("Nenhum usuário configurado.");
-    }
 
-    this.cache = user;
-    return user;
-  }
+    const grouped = users.reduce<Record<string, User[]>>((acc, user) => {
+      if (!user.scheduleTime) return acc;
 
-  async createOrUpdate(data: Partial<User>): Promise<User> {
-    const existing = await this.repo.findOne();
+      if (!acc[user.scheduleTime]) acc[user.scheduleTime] = [];
 
-    if (!existing) {
-      const created = await this.repo.save(data);
-      this.cache = created;
-      return created;
-    }
+      acc[user.scheduleTime].push(user);
+      return acc;
+    }, {});
 
-    const updated = await this.repo.save({
-      ...existing,
-      ...data,
-    });
+    const config: UserConfig[] = Object.entries(grouped).map(
+      ([timeScheduled, user]) => ({
+        timeScheduled,
+        user,
+      })
+    );
 
-    this.cache = updated;
-    return updated;
-  }
-
-  async updateFields(data: Partial<User>): Promise<User> {
-    const user = await this.load();
-
-    const updated = await this.repo.save({
-      ...user,
-      ...data,
-    });
-
-    this.cache = updated;
-    return updated;
+    this.cache = config;
+    return config;
   }
 
   clearCache() {
     this.cache = null;
   }
 
-  async saveGroupId(groupId: string) {
-    const user = await this.load();
+  async saveGroupId(user: User, groupId: string) {
     user.groupId = groupId;
     await this.repo.save(user);
+    this.clearCache();
   }
 }

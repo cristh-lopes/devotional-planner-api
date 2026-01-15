@@ -1,14 +1,11 @@
 import { PlanExecution } from "../../database/entities/PlanExecution";
 import { User } from "../../database/entities/User";
-import { UserService } from "../user/user.service";
 import { PlanEnum } from "./plan.enum";
 import { PlanRepository } from "./plan.repository";
 import { Day, Plan } from "./plan.types";
 
 export class PlanService {
   private cache: Map<PlanEnum, Plan> = new Map();
-
-  constructor(private _userService: UserService) {}
 
   private load(plan: PlanEnum): Plan {
     if (this.cache.has(plan)) {
@@ -20,10 +17,14 @@ export class PlanService {
     return loaded;
   }
 
-  private getNextDay(userExecutions: PlanExecution[]): number {
-    if (!userExecutions?.length) return 1;
-    const last = userExecutions.sort((a, b) => b.planDay - a.planDay)[0];
-    return last.planDay + 1;
+  private getNextDay(executions: PlanExecution[]): number {
+    if (!executions || executions.length === 0) return 1;
+
+    const lastExecution = executions.reduce((latest, current) =>
+      current.planDay > latest.planDay ? current : latest
+    );
+
+    return lastExecution.planDay + 1;
   }
 
   private getDay(plan: Plan, dayNumber: number): Day {
@@ -32,11 +33,11 @@ export class PlanService {
     return entry;
   }
 
-  async getNextPlanData(): Promise<{ user: User; day: Day }> {
-    const user = await this._userService.load();
+  async getNextPlanData(user: User): Promise<{ user: User; day: Day }> {
+    if (!user) throw new Error("Usuário não informado para o plano.");
 
     const plan = this.load(user.plan as PlanEnum);
-    const nextDay = this.getNextDay(user.executions);
+    const nextDay = this.getNextDay(user.executions ?? []);
     const day = this.getDay(plan, nextDay);
 
     return { user, day };

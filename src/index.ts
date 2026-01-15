@@ -19,17 +19,15 @@ async function initializeBot() {
     console.log("📱 Configurando o WhatsApp...");
     const { service: userService } = UserModule.build();
 
-    const planService = new PlanService(userService);
+    const planService = new PlanService();
     const canvasService = new CanvasService();
+    const whatsappService = new WhatsappService(userService);
 
     const execRepo = AppDataSource.getRepository(PlanExecution);
 
-    const config = await userService.load();
-
-    const whatsappService = new WhatsappService(userService);
+    const configs = await userService.loadConfigs();
 
     const ready = async () => {
-      const whatsService = whatsappService;
       console.log("\t✅ WhatsApp conectado!");
 
       const devotionalService = new DevotionalService(
@@ -38,34 +36,40 @@ async function initializeBot() {
         execRepo
       );
 
-      const sendDevotional = async () => {
-        try {
-          console.log("📖 Gerando devocional do dia...");
+      for (const config of configs) {
+        const sendDevotionalForGroup = async () => {
+          for (const user of config.user) {
+            try {
+              console.log(`📖 Gerando devocional | ${config.timeScheduled}`);
 
-          const devotional = await devotionalService.generateDevotional();
-          console.log("📨 Enviando mensagens para o grupo...");
+              const devotional = await devotionalService.generateDevotional(
+                user
+              );
 
-          await whatsService.sendImage(
-            devotional.image,
-            devotional.welcomeMessage
-          );
+              const group = await whatsappService.getGroupId(user);
 
-          await whatsService.sendMessages(devotional.messages);
-          await devotionalService.saveExecution(
-            devotional.day,
-            devotional.user
-          );
+              await whatsappService.sendImage(
+                group,
+                devotional.image,
+                devotional.welcomeMessage
+              );
 
-          console.log("✅ Devocional enviado.");
-        } catch (error) {
-          console.error("❌ Erro ao enviar devocional:", error);
-        }
-      };
+              await whatsappService.sendMessages(group, devotional.messages);
 
-      await devotionalService.devotinalSchedule(
-        sendDevotional,
-        config.scheduleTime
-      );
+              await devotionalService.saveExecution(devotional.dayNumber, user);
+
+              console.log(`✅ Enviado para ${user.groupName}`);
+            } catch (error) {
+              console.error(`❌ Erro ao enviar para ${user.groupName}:`, error);
+            }
+          }
+        };
+
+        await devotionalService.devotinalSchedule(
+          sendDevotionalForGroup,
+          config.timeScheduled
+        );
+      }
     };
 
     await whatsappService.init(ready);
