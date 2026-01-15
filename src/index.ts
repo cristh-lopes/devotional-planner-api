@@ -68,7 +68,7 @@ async function initializeBot() {
       );
     };
 
-    whatsappService.clientReady(ready);
+    await whatsappService.init(ready);
   } catch (err) {
     console.error("❌ Erro ao inicializar o bot:", err);
   }

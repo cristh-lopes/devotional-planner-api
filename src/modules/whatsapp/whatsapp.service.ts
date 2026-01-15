@@ -1,66 +1,107 @@
-import { Client, LocalAuth, MessageMedia } from "whatsapp-web.js";
-import { UserService } from "../user/user.service";
+import makeWASocket, {
+  useMultiFileAuthState,
+  fetchLatestBaileysVersion,
+  DisconnectReason,
+} from "@whiskeysockets/baileys";
 import qrcode from "qrcode-terminal";
+import { UserService } from "../user/user.service";
+import pino from "pino";
 
 export class WhatsappService {
-  private _client: Client;
-  constructor(private _userService: UserService) {
-    this.clientConfig();
-  }
+  private sock: ReturnType<typeof makeWASocket> | null = null;
+  private ready = false;
+  private initializing = false;
 
-  private async clientConfig() {
-    this._client = new Client({
-      authStrategy: new LocalAuth(),
-      puppeteer: {
-        headless: true,
-        args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      },
+  constructor(private readonly userService: UserService) {}
+
+  async init(onReady: () => void) {
+    if (this.initializing) return;
+    this.initializing = true;
+
+    const { state, saveCreds } = await useMultiFileAuthState("baileys_auth");
+    const { version } = await fetchLatestBaileysVersion();
+
+    this.sock = makeWASocket({
+      version,
+      auth: state,
+      printQRInTerminal: false,
+      logger: pino({ level: "warn" }),
     });
 
-    this._client.on("qr", (qr) => {
-      qrcode.generate(qr, { small: true });
-      console.log("📱 Escaneie o QR code acima para conectar.");
+    this.sock.ev.on("creds.update", saveCreds);
+
+    this.sock.ev.on("connection.update", async (update) => {
+      const { connection, qr, lastDisconnect } = update;
+
+      if (qr) {
+        qrcode.generate(qr, { small: true });
+        console.log("📱 Escaneie o QR code acima para conectar.");
+      }
+
+      if (connection === "open") {
+        console.log("✅ WhatsApp conectado");
+        this.ready = true;
+        this.initializing = false;
+        onReady();
+      }
+
+      if (connection === "close") {
+        this.ready = false;
+        this.initializing = false;
+
+        const statusCode = (lastDisconnect?.error as any)?.output?.statusCode;
+
+        const shouldReconnect = statusCode !== DisconnectReason.loggedOut;
+
+        console.log("❌ Conexão encerrada. Reconnect?", shouldReconnect);
+
+        if (shouldReconnect) {
+          console.log("🔄 Reconectando WhatsApp...");
+          setTimeout(() => this.init(onReady), 2000);
+        } else
+          console.log(
+            "🚪 WhatsApp deslogado. Apague 'baileys_auth' e escaneie novamente."
+          );
+      }
     });
   }
 
-  clientReady(fn: () => void) {
-    this._client.on("ready", fn);
-    this._client.initialize();
-  }
+  private async getGroupId(): Promise<string> {
+    if (!this.sock) throw new Error("WhatsApp não inicializado");
 
-  async getGroup() {
-    const user = await this._userService.load();
-    if (user.groupId) return this._client.getChatById(user.groupId);
+    const user = await this.userService.load();
 
-    const chats = await this._client.getChats();
+    if (user.groupId) return user.groupId;
 
-    const group = chats.find(
-      (chat) => chat.isGroup && chat.name.includes(user.groupName)
+    const groups = await this.sock.groupFetchAllParticipating();
+
+    const group = Object.values(groups).find((g) =>
+      g.subject.includes(user.groupName)
     );
 
-    if (!group) throw `❌ Grupo '${user.groupName}' não encontrado.`;
+    if (!group) throw new Error(`❌ Grupo '${user.groupName}' não encontrado`);
 
-    this._userService.saveGroupId(group.id._serialized);
-    return group;
+    await this.userService.saveGroupId(group.id);
+    return group.id;
   }
 
   async sendMessages(messages: string[]) {
-    const group = await this.getGroup();
+    if (!this.ready || !this.sock) throw new Error("WhatsApp não conectado");
 
-    for (const msg of messages) {
-      await this._client.sendMessage(group.id._serialized, msg);
-    }
+    const groupId = await this.getGroupId();
+
+    for (const msg of messages)
+      await this.sock.sendMessage(groupId, { text: msg });
   }
 
   async sendImage(imageBuffer: Buffer, caption?: string) {
-    const group = await this.getGroup();
+    if (!this.ready || !this.sock) throw new Error("WhatsApp não conectado");
 
-    const media = new MessageMedia(
-      "image/png",
-      imageBuffer.toString("base64"),
-      "devocional.png"
-    );
+    const groupId = await this.getGroupId();
 
-    await this._client.sendMessage(group.id._serialized, media, { caption });
+    await this.sock.sendMessage(groupId, {
+      image: imageBuffer,
+      caption,
+    });
   }
 }
