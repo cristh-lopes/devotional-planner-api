@@ -512,6 +512,10 @@
       "_passage": [
         {
           "_start": { "_book": "Gn", "_chapter": "50", "_verse": "1" },
+          "_end": { "_book": "Gn", "_chapter": "50", "_verse": "26" }
+        },
+        {
+          "_start": { "_book": "Ex", "_chapter": "1", "_verse": "1" },
           "_end": { "_book": "Ex", "_chapter": "2", "_verse": "10" }
         },
         {
@@ -1290,6 +1294,10 @@
         "_passage": [
           {
             "_start": { "_book": "Lv", "_chapter": "27", "_verse": "14" },
+            "_end": { "_book": "Lv", "_chapter": "27", "_verse": "34" }
+          },
+          {
+            "_start": { "_book": "Nm", "_chapter": "1", "_verse": "1" },
             "_end": { "_book": "Nm", "_chapter": "1", "_verse": "54" }
           },
           {
@@ -1710,6 +1718,10 @@
         "_passage": [
           {
             "_start": { "_book": "Nm", "_chapter": "36", "_verse": "1" },
+            "_end": { "_book": "Nm", "_chapter": "36", "_verse": "13" }
+          },
+          {
+            "_start": { "_book": "Dt", "_chapter": "1", "_verse": "1" },
             "_end": { "_book": "Dt", "_chapter": "1", "_verse": "46" }
           },
           {
@@ -2088,6 +2100,10 @@
         "_passage": [
           {
             "_start": { "_book": "Dt", "_chapter": "34", "_verse": "1" },
+            "_end": { "_book": "Dt", "_chapter": "34", "_verse": "12" }
+          },
+          {
+            "_start": { "_book": "Js", "_chapter": "1", "_verse": "1" },
             "_end": { "_book": "Js", "_chapter": "2", "_verse": "24" }
           },
           {
